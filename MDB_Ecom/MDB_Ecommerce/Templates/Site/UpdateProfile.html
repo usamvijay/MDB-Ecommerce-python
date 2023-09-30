@@ -1,0 +1,81 @@
+{% load static %}
+
+{% include 'Site/base.html' %}
+<!-- Section: Design Block -->
+<section class="text-center">
+ <!-- Background image -->
+ <div class="p-5 bg-image" style="
+       background-image: url('https://mdbootstrap.com/img/new/textures/full/171.jpg');
+       height: 300px;
+       "></div>
+ <!-- Background image -->
+
+ <div class="card mx-4 mx-md-5 shadow-5-strong" style="
+       margin-top: -100px;
+       background: hsla(0, 0%, 100%, 0.8);
+       backdrop-filter: blur(30px);
+       ">
+   <div class="card-body py-5 px-md-5">
+
+     <div class="row d-flex justify-content-center">
+       <div class="col-lg-5">
+         <h2 class="fw-bold mb-5">Update Profile</h2>
+
+         {% for msg in messages %}
+         <div  class="alert alert-danger"> {{ msg }}</div>
+         {% endfor %}
+         
+         <form method="POST" action="">
+            {% csrf_token %}
+           <!-- Email input -->
+           {% for U in User %}
+           <div class="form-outline mb-4">
+             <input type="text" id="form3Example3" value="{{ U.firstname }}" name="firstname" class="form-control" />
+             <label class="form-label" for="form3Example3">First name</label>
+           </div>
+           <!-- Mobile No input -->
+           <div class="form-outline mb-4">
+             <input type="text" id="form3Example3" value="{{ U.lastname }}" name="lastname" class="form-control" />
+             <label class="form-label" for="form3Example3">Last Name</label>
+           </div>
+
+           <!-- Password input -->
+           <div class="form-outline mb-4">
+             <input type="email" id="form3Example4" value="{{ U.email }}" name="email" class="form-control" />
+             <label class="form-label" for="form3Example4">Email</label>
+           </div>
+           <div class="form-outline mb-4">
+             <input type="text" id="form3Example4" value="{{ U.mobile }}" name="mobile" class="form-control" />
+             <label class="form-label" for="form3Example4">Mobile Number</label>
+           </div>
+           <button type="submit" class="btn btn-primary btn-block mb-4">
+             Update Now 
+           </button>
+           {% endfor %}
+           <!-- Register buttons -->
+           <div class="text-center">
+             <p>or sign up with:</p>
+             <button type="button" class="btn btn-link btn-floating mx-1">
+               <i class="fab fa-facebook-f"></i>
+             </button>
+
+             <button type="button" class="btn btn-link btn-floating mx-1">
+               <i class="fab fa-google"></i>
+             </button>
+
+             <button type="button" class="btn btn-link btn-floating mx-1">
+               <i class="fab fa-twitter"></i>
+             </button>
+
+             <button type="button" class="btn btn-link btn-floating mx-1">
+               <i class="fab fa-github"></i>
+             </button>
+           </div>
+         </form>
+       </div>
+     </div>
+   </div>
+ </div>
+</section>
+<!-- Section: Design Block -->
+{% include "Site/footer.html" %}

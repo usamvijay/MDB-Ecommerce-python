@@ -1,0 +1,205 @@
+
+{% load static %}
+{% include "Site/base.html" %}
+
+{% for msg in messages %}
+<div class="notify" id="popupMessage">
+
+  <div class="title-header">
+    <img src="{% static 'site_assets/img/success.png' %}"" height="55" />
+  </div>
+  <div class="message-body">{{ msg }}</div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-danger" onclick="closeDialog()">Close</button>
+  </div>
+</div>
+{% endfor %} 
+<!-- cart + summary -->
+<!-- cart + summary -->
+
+<section class="bg-light my-5">
+  
+  <div class="container">
+    <div class="row">
+      {% if request.session.User_email %}
+
+      {% else %}
+      <div class="col-xl-12 col-lg-12 mb-4">
+        <div class="card mb-4 border shadow-0">
+          <div class="p-4 d-flex justify-content-between">
+            <div class="">
+              <h5>Have an account?</h5>
+              <p class="mb-0 text-wrap "> consectetur adipisicing elit</p>
+            </div>
+            <div class="d-flex align-items-center justify-content-center flex-column flex-md-row">
+              <a href="#" class="btn btn-outline-primary me-0 me-md-2 mb-2 mb-md-0 w-100">Register</a>
+              <a href="#" class="btn btn-primary shadow-0 text-nowrap w-100">Sign in</a>
+            </div>
+          </div>
+        </div>
+      </div>
+      {% endif %}
+      <!-- cart -->
+      <div class="col-lg-12">
+        <div class="card border shadow-0">
+          <div class="m-4">
+            <h4 class="card-title mb-4">Your shopping cart</h4>
+            {% if Order %}
+            {% for Order in Order %}
+            <div class="row gy-3 mb-4">
+              <div class="col-lg-4">
+                <div class="me-lg-5">
+                  <div class="d-flex">
+                    <img src="{{ Order.product.Item_image.url }}" class="border rounded me-3" style="width: 96px; height: 96px;" />
+                    <div class="">
+                      <a href="#" class="nav-link">{{ Order.product.Item}}</a>
+                      <p class="text-muted">{{ cart.color }}, {{ cart.size }}</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-lg-1 col-sm-4 col-4 d-flex flex-row flex-lg-column flex-xl-row text-nowrap">
+                <div class="">
+                    <text class="h6">Qty: {{ Order.Quantity }}</text> <br /> 
+                </div>
+              </div>
+              <div class="col-lg-2 col-sm-4 col-4 d-flex flex-row flex-lg-column flex-xl-row text-nowrap">
+                <div class="">
+                  <text class="h6">₹ {{ Order.price }}.00</text> <br />
+                  <small class="text-muted text-nowrap"> ₹ {{ Order.product.descount_price }}.00 / per item </small>
+                </div>
+              </div>
+              <div class="col-lg-2 col-sm-4 col-4 d-flex flex-row flex-lg-column flex-xl-row text-nowrap">
+                <div class="">
+                  <text class="h6">Delevery address:</text> <br />
+                  <small class="text-muted text-nowrap">{{ Order.address.firstname }}, {{ Order.address.lastname }}: <b> {{Order.address.mobile }}</b> </small><br>
+                  <small class="text-muted text-nowrap">{{ Order.address.appartment }}, {{Order.address.address }} </small><br>
+                  <small class="text-muted text-nowrap">{{ Order.address.city }}, {{Order.address.state }} </small><br>
+                  <small class="text-muted text-nowrap">{{ Order.address.Zip_code }} </small>
+                </div>
+              </div>
+              <div class="col-lg-2 col-sm-6 d-flex justify-content-sm-center justify-content-md-start justify-content-lg-center justify-content-xl-end mb-2">
+                <div class="float-md-end">
+                  <a href="/Site/TrackOrder/{{ Order.id }}" class="btn btn-success border  icon-hover-danger">
+                     Track Order</a>
+                </div>
+              </div>
+            </div>
+            <hr>
+            {% endfor %}
+            {% else %}
+            <div class="card mb-4 border shadow-0">
+              <div class="p-4 d-flex justify-content-between">
+                <div class="">
+                  <h5 style="color:orange;">You have No Orders..?</h5>
+                  <p style="color:green;" class="mb-0 text-wrap "><i>You need to <s></s>hop  now and add items to cart...!</i></p>
+                </div>
+                <div class="d-flex align-items-center justify-content-center flex-column flex-md-row">
+                  <a href="/Site/grid_view" class="btn btn-danger shadow-0 text-nowrap w-100">Start shopping Now</a>
+                </div>
+              </div>
+            </div>
+    
+            {% endif %}
+          </div>
+        </div>
+      </div>
+      <!-- cart -->
+      <!-- summary -->
+      <!-- summary -->
+    </div>
+  </div>
+</section>
+<!-- cart + summary -->
+<section>
+  <div class="container my-5">
+    <header class="mb-4">
+      <h3>Recommended items</h3>
+    </header>
+
+    <div class="row">
+      <div class="col-lg-3 col-md-6 col-sm-6">
+        <div class="card px-4 border shadow-0 mb-4 mb-lg-0">
+          <div class="mask px-2" style="height: 50px;">
+            <div class="d-flex justify-content-between">
+              <h6><span class="badge bg-danger pt-1 mt-3 ms-2">New</span></h6>
+              <a href="#"><i class="fas fa-heart text-primary fa-lg float-end pt-3 m-2"></i></a>
+            </div>
+          </div>
+          <a href="#" class="">
+            <img src="https://bootstrap-ecommerce.com/bootstrap5-ecommerce/images/items/7.webp" class="card-img-top rounded-2" />
+          </a>
+          <div class="card-body d-flex flex-column pt-3 border-top">
+            <a href="#" class="nav-link">Gaming Headset with Mic</a>
+            <div class="price-wrap mb-2">
+              <strong class="">$18.95</strong>
+              <del class="">$24.99</del>
+            </div>
+            <div class="card-footer d-flex align-items-end pt-3 px-0 pb-0 mt-auto">
+              <a href="#" class="btn btn-outline-primary w-100">Add to cart</a>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-3 col-md-6 col-sm-6">
+        <div class="card px-4 border shadow-0 mb-4 mb-lg-0">
+          <div class="mask px-2" style="height: 50px;">
+            <a href="#"><i class="fas fa-heart text-primary fa-lg float-end pt-3 m-2"></i></a>
+          </div>
+          <a href="#" class="">
+            <img src="https://bootstrap-ecommerce.com/bootstrap5-ecommerce/images/items/5.webp" class="card-img-top rounded-2" />
+          </a>
+          <div class="card-body d-flex flex-column pt-3 border-top">
+            <a href="#" class="nav-link">Apple Watch Series 1 Sport </a>
+            <div class="price-wrap mb-2">
+              <strong class="">$120.00</strong>
+            </div>
+            <div class="card-footer d-flex align-items-end pt-3 px-0 pb-0 mt-auto">
+              <a href="#" class="btn btn-outline-primary w-100">Add to cart</a>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-3 col-md-6 col-sm-6">
+        <div class="card px-4 border shadow-0">
+          <div class="mask px-2" style="height: 50px;">
+            <a href="#"><i class="fas fa-heart text-primary fa-lg float-end pt-3 m-2"></i></a>
+          </div>
+          <a href="#" class="">
+            <img src="https://bootstrap-ecommerce.com/bootstrap5-ecommerce/images/items/9.webp" class="card-img-top rounded-2" />
+          </a>
+          <div class="card-body d-flex flex-column pt-3 border-top">
+            <a href="#" class="nav-link">Men's Denim Jeans Shorts</a>
+            <div class="price-wrap mb-2">
+              <strong class="">$80.50</strong>
+            </div>
+            <div class="card-footer d-flex align-items-end pt-3 px-0 pb-0 mt-auto">
+              <a href="#" class="btn btn-outline-primary w-100">Add to cart</a>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-3 col-md-6 col-sm-6">
+        <div class="card px-4 border shadow-0">
+          <div class="mask px-2" style="height: 50px;">
+            <a href="#"><i class="fas fa-heart text-primary fa-lg float-end pt-3 m-2"></i></a>
+          </div>
+          <a href="#" class="">
+            <img src="https://bootstrap-ecommerce.com/bootstrap5-ecommerce/images/items/10.webp" class="card-img-top rounded-2" />
+          </a>
+          <div class="card-body d-flex flex-column pt-3 border-top">
+            <a href="#" class="nav-link">Mens T-shirt Cotton Base Layer Slim fit </a>
+            <div class="price-wrap mb-2">
+              <strong class="">$13.90</strong>
+            </div>
+            <div class="card-footer d-flex align-items-end pt-3 px-0 pb-0 mt-auto">
+              <a href="#" class="btn btn-outline-primary w-100">Add to cart</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- Recommended -->
+{% include "Site/footer.html" %}

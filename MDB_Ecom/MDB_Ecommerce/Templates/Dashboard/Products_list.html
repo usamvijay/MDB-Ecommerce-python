@@ -1,0 +1,78 @@
+{% load static %}
+
+{% include 'Dashboard/sidebar.html' %}
+{% include 'Dashboard/navbar.html' %}
+
+
+<!-- partial -->
+<div class="main-panel">
+  <div class="content-wrapper">
+    <div class="row">
+      <div class="col-md-3 grid-margin stretch-card">
+      </div>
+      <div class="col-md-6 grid-margin stretch-card">
+        {% for msg in messages %}
+        <div class="alert alert-success"> {{ msg }}</div>
+        {% endfor %}
+
+      </div>
+    </div>
+    {% comment %} Category Table Start Hare {% endcomment %}
+    <div class="row ">
+      <div class="col-12 grid-margin">
+        <div class="card">
+          <div class="card-body">
+            <a class="btn btn-success" style="float:right;" href="/add_products">+ Add New Product</a>
+            <h4 class="card-title">Product list</h4>
+
+            <div class="table-responsive">
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th>
+                      S No
+                    </th>
+                    <th> image </th>
+                    <th> Product Name </th>
+                    <th> Category </th>
+                    <th> Disc Price</th>
+                    <th> Total Price</th>
+                    <th> Added on </th>
+                    <th> Actions </th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    {% for item in items %}
+                    <td>
+                      {{ forloop.counter }}
+                    </td>
+                    <td>
+                      <img src="{{ item.Item_image.url }}" alt="image" />
+                    </td>
+                    <td> {{ item.Item }} </td>
+                    <td> {{ item.Category.Category_name }} </td>
+                    <td> {{ item.descount_price }} </td>
+                    <td> {{ item.Total_price }} </td>
+                    <td> {{ item.Created_At }} </td>
+                    <td>
+                      <a class="badge badge-outline-success" href="#">Edit </a>
+                      <a class="badge badge-outline-danger" href="/RemoveProduct/{{ item.id }}">Delete</a>
+                    </td>
+                  </tr>
+                  {% endfor %}
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- content-wrapper ends -->
+  <!-- partial:../../partials/_footer.html -->
+
+
+  {% include 'Dashboard/footer.html' %}

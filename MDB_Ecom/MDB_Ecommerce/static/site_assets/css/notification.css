@@ -1,0 +1,37 @@
+.notify{
+    position: absolute;
+    top:20%;
+    left: 40%;
+    width: 30%;
+    height: auto;
+    background-color: white;
+    border-radius: 15px;
+    padding: 20px;
+    text-align: center;
+    vertical-align: middle;
+    z-index: 1;
+    box-shadow: 3px 3px 10px #272626;
+
+}
+.title-header{
+    background-color: white;
+}
+.message-body{
+    margin: 10px;
+}
+.bg-change{
+    background-color:#eef0f1 ;
+  
+}
+.carous{
+    background-color: black;
+}
+
+/* Order Tracking css */
+
+.Ordertracker{
+    background-color: red;
+    position: absolute;
+    top:50px;
+    left:20px;
+}

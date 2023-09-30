@@ -1,0 +1,110 @@
+{% load static %}
+
+{% include 'Dashboard/sidebar.html' %}
+{% include 'Dashboard/navbar.html' %}
+
+
+<!-- partial -->
+<div class="main-panel">
+  <div class="content-wrapper">
+    <div class="page-header">
+      <h3 class="page-title"> Products</h3>
+      <nav aria-label="breadcrumb">
+
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item"><a href="#">Forms</a></li>
+          <li class="breadcrumb-item active" aria-current="page">Products</li>
+
+        </ol>
+      </nav>
+    </div>
+    <div class="row">
+      <div class="col-md-12 grid-margin stretch-card">
+        <div class="card">
+          <div class="card-body">
+            <a class="btn btn-success" style="float:right;" href="/product_list"> Product list</a>
+            <h4 class="card-title">Add Producst</h4>
+            {% for msg in messages %}
+            <div class="alert alert-success"> {{ msg }}</div>
+            {% endfor %}
+            <form class="form-sample" method='POST' enctype="multipart/form-data" action="/add_products/">
+              {% csrf_token %}
+              <p class="card-description"> Personal info </p>
+              <div class="row">
+                <div class="col-md-6">
+                  <div class="form-group row">
+                    <label class="col-sm-3 col-form-label">Categories</label>
+                    <div class="col-sm-9">
+                      <select class="form-control" style="color:white;" name='cat_id'>
+                        {% for C in category %}
+                        <option value="{{ C.id }}" style="color:white;">{{ C.Category_name }}</option>
+                        {% endfor %}
+                      </select>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="form-group row">
+                    <label class="col-sm-3 col-form-label">Product Name</label>
+                    <div class="col-sm-9">
+                      <input type="text" placeholder=" Product Name" name="item_name" class="form-control" />
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-6">
+                  <div class="form-group row">
+                    <label class="col-sm-3 col-form-label">Image</label>
+                    <div class="col-sm-9">
+                      <input type="file" name="image" class="form-control" />
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="form-group row">
+                    <label class="col-sm-3 col-form-label">Total Price</label>
+                    <div class="col-sm-9">
+                      <input class="form-control" name="total_price" type='text' placeholder="Rs : 999/-" />
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-6">
+                  <div class="form-group row">
+                    <label class="col-sm-3 col-form-label">Descount</label>
+                    <div class="col-sm-9">
+                      <input class="form-control" name="disc_price" type='text' placeholder="Rs : 999/-" />
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="form-group row">
+                    <label class="col-sm-3 col-form-label">Quantity</label>
+                    <div class="col-sm-9">
+                      <input type='text' name="Qty" class="form-control" placeholder="Quantity   "
+                        style="color:white;" />
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-12">
+                  <div class="form-group row">
+                    <label class="col-sm-3 col-form-label">Description</label>
+                    <div class="col-sm-12">
+                      <textarea id="w3review" class="form-control" placeholder="Type Description Hare..." name="Description" rows="4" cols="50">             
+                      </textarea>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <button type="submit" name='Category_image' class="btn btn-success mr-2">Add Product</button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  {% include 'Dashboard/footer.html' %}

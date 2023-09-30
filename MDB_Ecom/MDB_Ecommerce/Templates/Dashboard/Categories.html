@@ -1,0 +1,103 @@
+{% load static %}
+
+{% include 'Dashboard/sidebar.html' %}
+{% include 'Dashboard/navbar.html' %}
+
+
+<!-- partial -->
+<div class="main-panel">
+  <div class="content-wrapper">
+    <div class="page-header">
+      <h3 class="page-title"> Categories </h3>
+      <nav aria-label="breadcrumb">
+
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item"><a href="#">Forms</a></li>
+          <li class="breadcrumb-item active" aria-current="page">Categories</li>
+        </ol>
+      </nav>
+    </div>
+    <div class="row">
+      <div class="col-md-3 grid-margin stretch-card">
+      </div>
+      <div class="col-md-6 grid-margin stretch-card">
+        <div class="card">
+          <div class="card-body">
+            <h4 class="card-title">Add Categories</h4>
+            {% for msg in messages %}
+            <div class="alert alert-success"> {{ msg }}</div>
+            {% endfor %}
+            <form method='POST' enctype="multipart/form-data" action="/Adding_Categories/">
+              {% csrf_token %}
+              <div class="form-group row">
+                <div class="col">
+                  <label>Category name</label>
+                  <div id="the-basics">
+                    <input style="color:white;" name='Category_name' class="typeahead" type="text"
+                      placeholder="Enter Category">
+                  </div>
+                </div>
+                <div class="col">
+                  <label>Image</label>
+                  <div id="bloodhound">
+                    <input class="typeahead" type="file" name='image' placeholder="Image">
+                  </div>
+                </div>
+              </div>
+              <button type="submit" name='Category_image' class="btn btn-primary mr-2">Submit</button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+    {% comment %} Category Table Start Hare {% endcomment %}
+    <div class="row ">
+      <div class="col-12 grid-margin">
+        <div class="card">
+          <div class="card-body">
+            <h4 class="card-title">Categories list</h4>
+            <div class="table-responsive">
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th>
+                      S No
+                    </th>
+                    <th> Category icon </th>
+                    <th> Category Name </th>
+                    <th> Added on </th>
+                    <th> Actions </th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    {% for C in Category %}
+                    <td>
+                      {{ forloop.counter }}
+                    </td>
+                    <td>
+                      <img src="{{ C.Category_icon.url }}" alt="image" />
+                    </td>
+                    <td> {{ C.Category_name }} </td>
+                    <td> {{ C.Addet_at }} </td>
+                    <td>
+                      <a class="badge badge-outline-success" href="#">Edit and Update</a>
+                      <a class="badge badge-outline-danger" href="/DeleteCategory/{{ C.id }}">Delete</a>
+                    </td>
+                  </tr>
+                  {% endfor %}
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- content-wrapper ends -->
+  <!-- partial:../../partials/_footer.html -->
+
+
+  {% include 'Dashboard/footer.html' %}
